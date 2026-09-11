@@ -1,4 +1,4 @@
-# bootstrap-attempt: 2
+# bootstrap-attempt: 3
 name: Bootstrap Laravel Guardian
 
 on:
@@ -31,13 +31,13 @@ jobs:
           echo "7d9b22b7f5fdabe7a905a9d0f29021f12c8383714a23ae35e697aa5f88ddf675  /tmp/guardian-source.tar.gz" | sha256sum --check -
           tar -xzf /tmp/guardian-source.tar.gz
 
-      - name: Remove bootstrap artifacts
+      - name: Remove bootstrap artifacts and defer CI workflow
         shell: bash
         run: |
           set -euo pipefail
           rm -rf .guardian-bootstrap
           rm -f guardian-source.tar.gz.b64
-          rm -f .github/workflows/bootstrap-guardian.yml
+          rm -f .github/workflows/ci.yml
 
       - name: Commit complete source
         shell: bash
