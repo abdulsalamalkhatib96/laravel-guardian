@@ -1,0 +1,66 @@
+{
+  "name": "abdulsalamalkhatib/laravel-guardian",
+  "description": "Production correctness engine for Laravel applications.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "static-analysis",
+    "correctness",
+    "concurrency",
+    "security",
+    "phpstan"
+  ],
+  "require": {
+    "php": "^8.2",
+    "ext-json": "*",
+    "nikic/php-parser": "^5.4",
+    "phpstan/phpstan": "^2.2.2",
+    "larastan/larastan": "^3.11",
+    "illuminate/console": "^11.44.2 || ^12.4.1 || ^13.0",
+    "illuminate/contracts": "^11.44.2 || ^12.4.1 || ^13.0",
+    "illuminate/support": "^11.44.2 || ^12.4.1 || ^13.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^9.12 || ^10.1 || ^11.0",
+    "phpunit/phpunit": "^11.5 || ^12.5 || ^13.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Guardian\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Guardian\\Tests\\": "tests/"
+    }
+  },
+  "bin": [
+    "bin/guardian"
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Guardian\\Laravel\\GuardianServiceProvider"
+      ]
+    },
+    "phpstan": {
+      "includes": [
+        "extension.neon"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "lint": "@php -r \"foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator('src')) as $f) if ($f->isFile() && $f->getExtension()==='php') { passthru('php -l '.escapeshellarg($f->getPathname()), $c); if ($c) exit($c); }\"",
+    "guardian": "@php bin/guardian scan"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

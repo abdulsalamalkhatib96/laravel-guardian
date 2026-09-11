@@ -1,0 +1,10 @@
+services:
+    -
+        class: Guardian\PHPStan\GuardianTriggerCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: Guardian\PHPStan\GuardianCollectedDataRule
+        tags:
+            - phpstan.rules.rule

@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+$autoload = dirname(__DIR__).'/vendor/autoload.php';
+if (! is_file($autoload)) {
+    fwrite(STDERR, "Laravel Guardian dependencies are not installed. Run composer install / composer require first.\n");
+    exit(2);
+}
+
+require $autoload;
+
+$application = new \Guardian\Application\Console\CliApplication(\Guardian\Application\Guardian::createDefault());
+exit($application->run($argv));
